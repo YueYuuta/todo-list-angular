@@ -1,31 +1,32 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Todo } from '../interfaces/todo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StateService {
+  private _todoSelect = new BehaviorSubject<Todo>(undefined);
+  private todoSelect$ = this._todoSelect.asObservable();
 
-  public todoSelect$ = new BehaviorSubject<Todo>(undefined);
-  public todoList$ = new BehaviorSubject<Todo[]>(undefined);
+  private _todoList = new BehaviorSubject<Todo[]>(undefined);
+  private todoList$ = this._todoList.asObservable();
 
-  constructor() { }
+  constructor() {}
 
-  get todoSelect() {
-    return this.todoSelect$.getValue();
+  get todoSelect(): Observable<Todo> {
+    return this.todoSelect$;
   }
 
-  setTodoSelect(value: Todo) {
-    this.todoSelect$.next(value);
+  setTodoSelect(value: Todo): void {
+    this._todoSelect.next(value);
   }
 
-  get todoList() {
-    return this.todoList$.getValue();
+  get todoList(): Observable<Todo[]> {
+    return this.todoList$;
   }
 
-  setTodoList(value: Todo[]) {
-    this.todoList$.next(value);
+  setTodoList(value: Todo[]): void {
+    this._todoList.next(value);
   }
-
 }

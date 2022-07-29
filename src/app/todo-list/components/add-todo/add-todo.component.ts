@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Todo } from '../../interfaces/todo';
+import { CreateTodo, Todo } from '../../interfaces/todo';
 import { StateService } from '../../services/state.service';
 import { TodoService } from '../../services/todo.service';
 
@@ -23,7 +23,7 @@ export class AddTodoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.state.todoSelect$.subscribe((resp) => (this.todo = resp));
+    this.state.todoSelect.subscribe((resp) => (this.todo = resp));
     this.dinamyc();
   }
   private dinamyc() {
@@ -58,7 +58,7 @@ export class AddTodoComponent implements OnInit {
     }
   }
   private create(todo: any) {
-    const createTodo: Todo = {
+    const createTodo: CreateTodo = {
       description: todo.descriptionTodo,
       finish_at: todo.finishAt,
       status: 0,
@@ -77,7 +77,7 @@ export class AddTodoComponent implements OnInit {
     );
   }
   private update(todo: any) {
-    const createTodo: Todo = {
+    const createTodo: CreateTodo = {
       description: todo.descriptionTodo,
       finish_at: todo.finishAt,
       status: this.todo.status,

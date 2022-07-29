@@ -2,7 +2,8 @@
 
 <div class="container__search">
   <div>
-    <app-input [frmTodo]="input"></app-input>
+    <input type="text" [formControl]="inputForm" placeholder="buscar...">
+    <!-- <app-input [frmTodo]="input"></app-input> -->
   </div>
   <div>
 
@@ -12,7 +13,7 @@
 
 <div class="container__list-todo" *ngFor="let todo of listPayments">
   <div>
-    <input [formControl]="check" type="checkbox" (change)="onChangeStatus(todo)" [checked]="todo.status === 1" />
+    <input [formControl]="check" type="checkbox" (change)="onChangeStatus(todo)" [checked]="todo.status === 1">
   </div>
   <div [ngClass]="{ 'todo-finished': todo.status === 1}">
     {{ todo.description }}

@@ -150,7 +150,7 @@ describe('TodoList App Test', () => {
     const spy = jest
       .spyOn(todoService, 'update')
       .mockReturnValue(of(responseTodo));
-    stateService.todoSelect$.next(todoSelected);
+    stateService.setTodoSelect(todoSelected);
     fixtureAddTodo.detectChanges();
     addTodoComponent.onClickAdd();
     expect(spy).toBeCalledTimes(1);
@@ -160,7 +160,7 @@ describe('TodoList App Test', () => {
     const spy = jest.spyOn(todoService, 'update').mockImplementation(() => {
       return throwError({ err: { error: { message: 'sdasdasd' } } });
     });
-    stateService.todoSelect$.next(todoSelected);
+    stateService.setTodoSelect(todoSelected);
     fixtureAddTodo.detectChanges();
     addTodoComponent.onClickAdd();
     expect(spy).toBeCalledTimes(1);
@@ -184,7 +184,7 @@ describe('TodoList App Test', () => {
     const spy = jest
       .spyOn(todoService, 'delete')
       .mockReturnValue(of(responseTodo));
-    stateService.todoList$.next(todoListResponse.data);
+    stateService.setTodoList(todoListResponse.data);
     todoWrapperComponent.delete(26);
     expect(spy).toBeCalledTimes(1);
   });
@@ -206,7 +206,7 @@ describe('TodoList App Test', () => {
     const spy = jest
       .spyOn(todoService, 'update')
       .mockReturnValue(of(responseTodo));
-    stateService.todoList$.next(todoListResponse.data);
+    stateService.setTodoList(todoListResponse.data);
     todoWrapperComponent.onChangeStatus(todoSelected);
     expect(spy).toBeCalledTimes(1);
   });
@@ -216,7 +216,7 @@ describe('TodoList App Test', () => {
     const spy = jest.spyOn(todoService, 'update').mockImplementation(() => {
       return throwError({ err: { error: { message: 'sdasdasd' } } });
     });
-    stateService.todoList$.next(todoListResponse.data);
+    stateService.setTodoList(todoListResponse.data);
     todoWrapperComponent.onChangeStatus(todoSelected);
     expect(spy).toBeCalledTimes(1);
   });

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ResponseTodo } from '../interfaces/response';
 import { tap } from 'rxjs/operators';
 import { StateService } from './state.service';
-import { Todo } from '../interfaces/todo';
+import { CreateTodo, Todo } from '../interfaces/todo';
 
 @Injectable({
   providedIn: 'root',
@@ -27,13 +27,13 @@ export class TodoService {
   delete(id: number): Observable<ResponseTodo> {
     return this.http.delete<ResponseTodo>(`${this.ENPOINT}/${id}`);
   }
-  create(todo: Todo): Observable<ResponseTodo> {
+  create(todo: CreateTodo): Observable<ResponseTodo> {
     return this.http.post<ResponseTodo>(
       `${this.ENPOINT}/?id_author=${this.ID_AUTOR}`,
       todo
     );
   }
-  update(id: number, todo: Todo): Observable<ResponseTodo> {
+  update(id: number, todo: CreateTodo): Observable<ResponseTodo> {
     return this.http.put<ResponseTodo>(`${this.ENPOINT}/${id}`, todo);
   }
 }
